@@ -5,25 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tentang BookFinder</title>
 
-    <link rel="stylesheet" href="{{ url_for('custom_static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
+<body>
 
-<body class="dark">
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <img src="https://img.icons8.com/color/48/books.png" width="34">
+            <span>BookFinder</span>
+        </div>
 
-<nav class="navbar">
-    <div class="logo">📘 BookFinder</div>
-    <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/otomasi">Otomasi</a></li>
-        <li><a href="/about">About</a></li>
-    </ul>
-    <button id="toggle-theme">🌙</button>
-</nav>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/otomasi">Otomasi</a>
+            <a href="/about">About</a>
+            <span id="themeToggle">☀️</span>
+        </div>
+    </nav>
 
-<section class="container">
-    <div class="card">
+    <!-- ABOUT CARD -->
+    <div class="about-wrapper">
+
         <h1>Tentang BookFinder</h1>
+
         <p>
             BookFinder adalah aplikasi web yang menggabungkan pencarian buku,
             crawling Wikipedia, analisis NLP, dashboard visual, serta otomasi data cuaca dalam satu sistem terpadu.
@@ -40,10 +47,9 @@
         </ul>
 
         <h2>Pengembang</h2>
-        <p><b>Muhammad Damar Zaky Al-Ayyubi</b><br>NIM: 23051130033</p>
+        <p><strong>Muhammad Damar Zaky Al-Ayyubi</strong><br>
+           NIM: 23051130033</p>
     </div>
-</section>
 
-<script src="{{ url_for('custom_static', filename='theme.js') }}"></script>
 </body>
 </html>
