@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About - BookFinder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+  <h1>📚 BookFinder</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/otomasi">Otomasi</a>
+    <a href="/about" class="active">About</a>
+    <button id="theme-toggle" class="theme-btn">🌙</button>
+  </nav>
+</header>
+
+<div class="about-card">
+  <h2>Tentang BookFinder</h2>
+
+  <p class="about-sub">
+    BookFinder adalah aplikasi web yang menggabungkan pencarian buku, crawling Wikipedia,
+    analisis NLP, dashboard visual, serta otomasi data cuaca dalam satu sistem terpadu.
+  </p>
+
+  <h3>Fitur Utama</h3>
+  <ul class="about-list">
+    <li>Pencarian buku via Google Books API</li>
+    <li>Crawling Wikipedia</li>
+    <li>Analisis NLP</li>
+    <li>Dashboard grafik Chart.js</li>
+    <li>Wordcloud otomatis</li>
+    <li>Otomasi cuaca (CSV & PNG)</li>
+  </ul>
+
+  <h3>Pengembang</h3>
+  <p class="about-dev">
+    <strong>Muhammad Damar Zaky Al-Ayyubi</strong><br>
+    NIM: 23051130033
+  </p>
+</div>
+
+<footer>BookFinder Project © 2025</footer>
+
+<!-- THEME MODE SCRIPT -->
+<script>
+  const btn = document.getElementById("theme-toggle");
+  const body = document.body;
+
+  if(localStorage.getItem("theme") === "light"){
+    body.classList.add("light");
+    btn.textContent = "☀️";
+  }
+
+  btn.onclick = () => {
+    body.classList.toggle("light");
+    if(body.classList.contains("light")){
+      btn.textContent = "☀️";
+      localStorage.setItem("theme","light");
+    }else{
+      btn.textContent = "🌙";
+      localStorage.setItem("theme","dark");
+    }
+  }
+</script>
+
+</body>
+</html>
