@@ -1,89 +1,24 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Dashboard Analisis</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard - BookFinder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-<header class="navbar">
-  <h1>📊 Dashboard</h1>
-  <nav>
+<nav>
     <a href="/">Home</a>
     <a href="/dashboard">Dashboard</a>
     <a href="/otomasi">Otomasi</a>
     <a href="/about">About</a>
-    <button id="theme-toggle" class="theme-btn">🌙</button>
-  </nav>
-</header>
+</nav>
 
-<div class="dash-card">
-  <h2>Analisis Kata</h2>
-  <canvas id="wordChart"></canvas>
+<div class="container">
+    <h1>Dashboard Analisis 📊</h1>
+    <p>Grafik frekuensi kata, rating buku, wordcloud, dan analisis NLP.</p>
 
-  <h2 style="margin-top:40px;">Distribusi Rating</h2>
-  <canvas id="ratingChart"></canvas>
-
-  <h2 style="margin-top:40px;">Wordcloud</h2>
-  <img src="{{ url_for('static', filename=wordcloud) }}" class="wc-img">
-
-  <h2 style="margin-top:40px;">Sentimen</h2>
-  <ul>
-    <li>Positif: {{ sentiments.pos }}</li>
-    <li>Netral: {{ sentiments.neu }}</li>
-    <li>Negatif: {{ sentiments.neg }}</li>
-  </ul>
+    <img src="/static/outputs/wordcloud_dashboard.png" width="400">
 </div>
-
-<script>
-  new Chart(document.getElementById("wordChart"), {
-    type: "bar",
-    data: {
-      labels: {{ common_words | map(attribute=0) | list | safe }},
-      datasets: [{
-        label: "Frekuensi",
-        data: {{ common_words | map(attribute=1) | list | safe }},
-        backgroundColor: "rgba(59,130,246,0.8)"
-      }]
-    }
-  });
-
-  new Chart(document.getElementById("ratingChart"), {
-    type: "pie",
-    data: {
-      labels: {{ rating_data.keys() | list | safe }},
-      datasets: [{
-        data: {{ rating_data.values() | list | safe }}
-      }]
-    }
-  });
-</script>
-
-<script>
-  const toggleBtn = document.getElementById("theme-toggle");
-  const body = document.body;
-
-  if (localStorage.getItem("theme") === "light") {
-    body.classList.add("light");
-    toggleBtn.textContent = "☀️";
-  }
-
-  toggleBtn.addEventListener("click", () => {
-    body.classList.toggle("light");
-
-    if (body.classList.contains("light")) {
-      toggleBtn.textContent = "☀️";
-      localStorage.setItem("theme","light");
-    } else {
-      toggleBtn.textContent = "🌙";
-      localStorage.setItem("theme","dark");
-    }
-  });
-</script>
 
 </body>
 </html>
