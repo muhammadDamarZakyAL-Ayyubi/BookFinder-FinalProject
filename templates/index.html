@@ -3,58 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookFinder - Home</title>
+    <title>BookFinder - Temukan Buku Favoritmu</title>
 
-    <!-- FIXED: Panggil CSS dengan benar -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
-<body>
+<body class="dark">
+
     <nav class="navbar">
-        <h1 class="logo">📚 BookFinder</h1>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/otomasi">Otomasi</a>
-            <a href="/about">About</a>
+        <div class="logo">
+            <span class="logo-icon">📚</span>
+            <span class="logo-text">BookFinder</span>
         </div>
-        <button class="theme-toggle">🌙</button>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/otomasi">Otomasi</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+
+        <button id="themeToggle">🌙</button>
     </nav>
 
+
     <section class="hero">
-        <h2>Temukan Buku Favoritmu</h2>
+        <h1>Temukan Buku Favoritmu</h1>
         <p>Cari buku, crawling Wikipedia, analisis NLP, dan dashboard visual premium.</p>
 
-        <form method="POST">
-            <input type="text" name="query" placeholder="Cari buku..." value="{{ query }}">
-            <label><input type="checkbox" name="do_crawl"> Tambahkan Crawling Wikipedia</label>
-            <button type="submit">Cari</button>
+        <form method="POST" class="search-box">
+            <input type="text" name="query" placeholder="Cari buku..." required/>
+
+            <label class="checkbox">
+                <input type="checkbox" name="do_crawl"/>
+                Tambahkan Crawling Wikipedia
+            </label>
+
+            <button type="submit" class="btn-yellow">Cari</button>
         </form>
     </section>
+
 
     <section class="results">
         <h2>Hasil Pencarian Buku 📚</h2>
 
-        {% if books %}
-            <div class="book-grid">
-                {% for b in books %}
-                    <div class="book-card">
-                        <img src="{{ b.thumbnail }}" alt="{{ b.title }}">
-                        <h3>{{ b.title }}</h3>
-                        <p class="author">{{ b.authors }}</p>
-                        <p class="desc">{{ b.desc[:200] }}...</p>
-                        <a href="{{ b.url }}" class="detail">Detail Buku</a>
-                    </div>
-                {% endfor %}
+        <div class="book-list">
+        {% for b in books %}
+            <div class="book-card">
+                <img src="{{ b.thumbnail }}" alt="Cover" class="book-img">
+
+                <h3>{{ b.title }}</h3>
+                <p class="author">{{ b.authors }}</p>
+
+                <p class="desc">
+                    {{ b.desc[:180] }}...
+                </p>
+
+                <a href="{{ b.url }}" class="detail-btn" target="_blank">
+                    Detail Buku
+                </a>
             </div>
-        {% endif %}
+        {% endfor %}
+        </div>
+
     </section>
 
-    {% if crawl_text %}
-        <section class="wiki">
-            <h2>Hasil Crawling Wikipedia 🌐</h2>
-            <p>{{ crawl_text }}</p>
-        </section>
-    {% endif %}
+    <script>
+    // Toggle tema
+    document.getElementById("themeToggle").onclick = () => {
+        document.body.classList.toggle("dark");
+    };
+    </script>
+
 </body>
 </html>
