@@ -1,1 +1,90 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BookFinder - Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+  <h1>📚 BookFinder</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/otomasi">Otomasi</a>
+    <a href="/about">About</a>
+    <button id="theme-toggle" class="theme-btn">🌙</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Temukan Buku Favoritmu</h2>
+  <p>Cari buku, crawling Wikipedia, analisis NLP, dan dashboard visual premium.</p>
+</section>
+
+<div class="search-box">
+  <form method="post">
+
+    <input type="text" name="query" placeholder="Cari buku..." value="{{ query }}">
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="crawl" name="do_crawl">
+      <label for="crawl">Tambahkan Crawling Wikipedia</label>
+    </div>
+
+    <button class="btn-primary">Cari</button>
+
+  </form>
+</div>
+
+<h2 class="section-title">Hasil Pencarian Buku 📚</h2>
+
+<div class="book-grid">
+  {% for b in books %}
+  <div class="book-card">
+    <img src="{{ b.thumbnail }}">
+    <h3>{{ b.title }}</h3>
+    <p><em>{{ b.authors }}</em></p>
+    <p>{{ b.desc[:120] }}...</p>
+    <a href="{{ b.url }}" target="_blank">Detail Buku</a>
+  </div>
+  {% endfor %}
+</div>
+
+{% if crawl_text %}
+<div class="crawl-box">
+  <h3>Hasil Crawling Wikipedia</h3>
+  <p style="white-space:pre-line;">{{ crawl_text }}</p>
+</div>
+{% endif %}
+
+<footer>BookFinder Project © 2025</footer>
+
+<!-- THEME MODE SCRIPT -->
+<script>
+  const btn = document.getElementById("theme-toggle");
+  const body = document.body;
+
+  if(localStorage.getItem("theme") === "light"){
+    body.classList.add("light");
+    btn.textContent = "☀️";
+  }
+
+  btn.onclick = () => {
+    body.classList.toggle("light");
+    if(body.classList.contains("light")){
+      btn.textContent = "☀️";
+      localStorage.setItem("theme","light");
+    }else{
+      btn.textContent = "🌙";
+      localStorage.setItem("theme","dark");
+    }
+  }
+</script>
+
+</body>
+</html>
