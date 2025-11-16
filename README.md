@@ -1,7 +1,23 @@
-🌈 BOOKFINDER – FINAL PROJECT PRAKTIK APLIKASI WEB
-<p align="center"> <img src="https://img.shields.io/badge/BookFinder-FINAL%20PROJECT-blueviolet?style=for-the-badge&logo=bookstack&logoColor=white"/> <img src="https://img.shields.io/badge/FLASK-Framework-black?style=for-the-badge&logo=flask"/> <img src="https://img.shields.io/badge/NLP-NLTK-green?style=for-the-badge&logo=apache-spark"/> <img src="https://img.shields.io/badge/Dashboard-Chart.js-orange?style=for-the-badge&logo=chartdotjs"/> <img src="https://img.shields.io/badge/Deployment-Render.com-blue?style=for-the-badge&logo=render"/> </p>
-<p align="center"> <img src="https://i.ibb.co/Sdtd0Sx/banner-gradient-bookfinder.png" width="900"/> </p>
-✨ Deskripsi Proyek
+# 🌈 BOOKFINDER – FINAL PROJECT PRAKTIK APLIKASI WEB
+
+<p align="center">
+  <img src="https://img.shields.io/badge/BookFinder-FINAL%20PROJECT-blueviolet?style=for-the-badge&logo=bookstack&logoColor=white"/>
+  <img src="https://img.shields.io/badge/FLASK-Framework-black?style=for-the-badge&logo=flask"/>
+  <img src="https://img.shields.io/badge/NLP-NLTK-green?style=for-the-badge&logo=apache-spark"/>
+  <img src="https://img.shields.io/badge/Dashboard-Chart.js-orange?style=for-the-badge&logo=chartdotjs"/>
+  <img src="https://img.shields.io/badge/Deployment-Render.com-blue?style=for-the-badge&logo=render"/>
+</p>
+
+<p align="center">
+  <img src="https://i.ibb.co/Sdtd0Sx/banner-gradient-bookfinder.png" width="900"/>
+</p>
+
+---
+
+## ✨ Deskripsi Proyek
+
+BookFinder adalah aplikasi web untuk mencari buku, melakukan crawling Wikipedia, melakukan analisis NLP, membuat dashboard visual, serta otomatisasi data cuaca. Proyek ini dibangun untuk memenuhi Final Project mata kuliah Praktik Aplikasi Web.
+
 
 BookFinder adalah aplikasi web modern yang menggabungkan:
 
