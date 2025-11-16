@@ -5,70 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Analisis</title>
 
-    <link rel="stylesheet" href="{{ url_for('custom_static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<body>
 
-<body class="dark">
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <img src="https://img.icons8.com/color/48/books.png" width="34">
+            <span>Dashboard</span>
+        </div>
 
-<nav class="navbar">
-    <div class="logo">📊 Dashboard</div>
-    <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/otomasi">Otomasi</a></li>
-        <li><a href="/about">About</a></li>
-    </ul>
-    <button id="toggle-theme">🌙</button>
-</nav>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/otomasi">Otomasi</a>
+            <a href="/about">About</a>
+            <span id="themeToggle">☀️</span>
+        </div>
+    </nav>
 
-<section class="container">
-    <div class="card">
+    <!-- WORD FREQUENCY -->
+    <div class="dashboard-card">
         <h2>Analisis Kata</h2>
         <canvas id="wordChart"></canvas>
     </div>
 
-    <div class="card">
+    <!-- RATING DISTRIBUTION -->
+    <div class="dashboard-card">
         <h2>Distribusi Rating</h2>
         <canvas id="ratingChart"></canvas>
     </div>
 
-    <div class="card">
+    <!-- WORDCLOUD -->
+    <div class="dashboard-card">
         <h2>Wordcloud</h2>
-        <img src="{{ url_for('custom_static', filename=wordcloud) }}" class="wordcloud-img">
+        {% if wordcloud %}
+        <img src="/outputs/{{ wordcloud }}" width="70%">
+        {% endif %}
     </div>
-</section>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // WORD FREQUENCY CHART
+        const labels = [{% for x,y in common_words %}"{{ x }}",{% endfor %}];
+        const values = [{% for x,y in common_words %}{{ y }},{% endfor %}];
 
-<script>
-    const labels = {{ common_words|map(attribute=0)|list }};
-    const values = {{ common_words|map(attribute=1)|list }};
+        new Chart(document.getElementById("wordChart"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Frekuensi",
+                    data: values,
+                    backgroundColor: "rgba(54, 162, 235, 0.7)"
+                }]
+            }
+        });
 
-    new Chart(document.getElementById("wordChart"), {
-        type: "bar",
-        data: {
-            labels: labels,
-            datasets: [{
-                label: "Frekuensi",
-                data: values
-            }]
-        }
-    });
+        // RATING CHART
+        const ratingLabels = [{% for x,y in rating_data.items() %}"{{ x }}",{% endfor %}];
+        const ratingValues = [{% for x,y in rating_data.items() %}{{ y }},{% endfor %}];
 
-    const ratingLabels = Object.keys({{ rating_data|safe }});
-    const ratingValues = Object.values({{ rating_data|safe }});
+        new Chart(document.getElementById("ratingChart"), {
+            type: "pie",
+            data: {
+                labels: ratingLabels,
+                datasets: [{
+                    data: ratingValues,
+                    backgroundColor: ["#60a5fa","#f87171","#facc15","#34d399","#a78bfa","#fb923c"]
+                }]
+            }
+        });
+    </script>
 
-    new Chart(document.getElementById("ratingChart"), {
-        type: "pie",
-        data: {
-            labels: ratingLabels,
-            datasets: [{
-                data: ratingValues
-            }]
-        }
-    });
-</script>
-
-<script src="{{ url_for('custom_static', filename='theme.js') }}"></script>
 </body>
 </html>
