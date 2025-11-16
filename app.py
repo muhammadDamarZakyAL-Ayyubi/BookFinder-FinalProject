@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 app.secret_key = "bookfinder_secret"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -156,3 +156,4 @@ def outputs(file):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
