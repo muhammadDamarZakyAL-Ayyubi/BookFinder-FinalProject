@@ -14,7 +14,7 @@
 
 BookFinder adalah aplikasi web yang menggabungkan pencarian buku, crawling Wikipedia, analisis NLP, dashboard visual, dan otomatisasi data dalam satu platform modern. Proyek ini dibuat untuk memenuhi Final Project mata kuliah **Praktik Aplikasi Web**.
 
-Aplikasi ini memudahkan pengguna untuk:
+Aplikasi ini memudahkan pengguna untuk: 
 
 - 🔍 Mencari buku berdasarkan kata kunci  
 - 🌐 Mengambil ringkasan dari Wikipedia  
