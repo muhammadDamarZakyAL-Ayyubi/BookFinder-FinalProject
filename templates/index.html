@@ -5,60 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookFinder</title>
 
-    <link rel="stylesheet" href="{{ url_for('custom_static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
-
-<body class="dark">
+<body>
 
     <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="logo">📚 BookFinder</div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/otomasi">Otomasi</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-        <button id="toggle-theme">🌙</button>
+    <nav>
+        <div class="logo">
+            <img src="https://img.icons8.com/color/48/books.png" width="34">
+            <span>BookFinder</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/otomasi">Otomasi</a>
+            <a href="/about">About</a>
+            <span id="themeToggle">☀️</span>
+        </div>
     </nav>
 
-    <section class="container">
-        <h1 class="title">Temukan Buku Favoritmu</h1>
-        <p class="subtitle">
-            Cari buku, crawling Wikipedia, analisis NLP, dan dashboard visual premium.
-        </p>
+    <!-- HERO -->
+    <div class="hero">
+        <h1>Temukan Buku Favoritmu</h1>
+        <p>Cari buku, crawling Wikipedia, analisis NLP, dan dashboard visual premium.</p>
+    </div>
 
-        <form method="POST" class="search-box">
+    <!-- SEARCH BOX -->
+    <form method="POST">
+        <div class="search-box">
             <input type="text" name="query" placeholder="Cari buku..." value="{{ query }}">
-            <div class="checkbox-row">
-                <input type="checkbox" name="do_crawl" id="do_crawl">
-                <label for="do_crawl">Tambahkan Crawling Wikipedia</label>
+            
+            <div class="checkbox">
+                <input type="checkbox" name="do_crawl">
+                <label>Tambahkan Crawling Wikipedia</label>
             </div>
-            <button type="submit" class="btn-primary">Cari</button>
-        </form>
 
-        <h2 class="section-title">Hasil Pencarian Buku 📊</h2>
-
-        <div class="book-grid">
-            {% for b in books %}
-            <div class="book-card">
-                <img src="{{ b.thumbnail }}" alt="thumbnail">
-                <h3>{{ b.title }}</h3>
-                <p class="author">{{ b.authors }}</p>
-                <p class="desc">{{ b.desc[:200] }}...</p>
-                <a href="{{ b.url }}" class="detail-btn" target="_blank">Detail Buku</a>
-            </div>
-            {% endfor %}
+            <button class="search-btn">Cari</button>
         </div>
+    </form>
 
-        {% if crawl_text %}
-        <div class="crawl-box">
-            <h3>Hasil Crawling Wikipedia</h3>
-            <p>{{ crawl_text }}</p>
+    <!-- RESULTS -->
+    <h2 class="result-title">Hasil Pencarian Buku 📚</h2>
+
+    <div class="book-grid">
+        {% for b in books %}
+        <div class="book-card">
+            <img src="{{ b.thumbnail }}" alt="thumbnail">
+            <div class="book-title">{{ b.title }}</div>
+            <div class="book-author">{{ b.authors }}</div>
+
+            <a href="{{ b.url }}" target="_blank">
+                <button class="search-btn" style="margin-top:15px;">Detail Buku</button>
+            </a>
         </div>
-        {% endif %}
-    </section>
+        {% endfor %}
+    </div>
 
-    <script src="{{ url_for('custom_static', filename='theme.js') }}"></script>
 </body>
 </html>
